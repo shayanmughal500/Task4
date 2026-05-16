@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catalog-Z</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #2eada5;
+      --teal-dark: #249990;
+      --text-dark: #333;
+      --text-muted: #888;
+      --text-light: #aaa;
+      --bg-light: #f5f5f5;
+      --bg-footer: #e8e8e8;
+      --white: #fff;
+      --border: #ddd;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 52px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .nav-brand .brand-icon {
+      width: 22px;
+      height: 22px;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+    }
+
+    .nav-brand .brand-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      padding-bottom: 4px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-links a.active {
+      color: var(--teal);
+      border-bottom: 2px solid var(--teal);
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      width: 100%;
+      height: 110px;
+      background: linear-gradient(135deg, #a8d8e8 0%, #c5e3ef 40%, #daeef7 70%, #b0cfe0 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-bird {
+      position: absolute;
+      left: 28%;
+      bottom: 0;
+      height: 110px;
+      opacity: 0.9;
+    }
+
+    .hero-search {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      z-index: 2;
+    }
+
+    .hero-search input {
+      width: 260px;
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-right: none;
+      outline: none;
+      font-size: 0.88rem;
+      font-family: inherit;
+      background: var(--white);
+      color: var(--text-dark);
+    }
+
+    .hero-search button {
+      height: 36px;
+      padding: 0 14px;
+      background: var(--teal);
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .hero-search button:hover { background: var(--teal-dark); }
+
+    /* ── MAIN CONTENT ── */
+    .container {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 30px 10px 50px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .page-info {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .page-info span {
+      display: inline-block;
+      border: 1px solid var(--border);
+      padding: 1px 7px;
+      margin: 0 3px;
+      font-weight: 600;
+    }
+
+    /* ── PHOTO GRID ── */
+    .photo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ── CARD HOVER EFFECT ── */
+    .photo-card {
+      flex: 0 0 calc(25% - 9px);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .photo-card:hover img {
+      opacity: 0.88;
+    }
+
+    .photo-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0 12px;
+    }
+
+    .photo-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .photo-views {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .btn-prev, .btn-next {
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-prev:hover, .btn-next:hover {
+      background: var(--teal-dark);
+      transform: scale(1.03);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .page-numbers {
+      display: flex;
+      gap: 5px;
+    }
+
+    .page-numbers button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      color: var(--text-dark);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .page-numbers button.active,
+    .page-numbers button:hover {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-footer);
+      padding: 36px 40px 16px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      display: block;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover { color: var(--teal); }
+
+    .footer-col.about-col { max-width: 200px; }
+
+    .footer-social {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .footer-social a {
+      width: 28px;
+      height: 28px;
+      background: var(--teal);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      border-radius: 50%;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .footer-social a:hover { background: var(--teal-dark); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .photo-card { flex: 0 0 calc(50% - 6px); }
+      .container { padding: 20px 14px 40px; }
+      .footer-top { gap: 30px; }
+      nav { padding: 0 16px; }
+      .hero-bird { left: 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
+      </div>
+      Catalog-Z
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Photos</a></li>
+      <li><a href="#">Videos</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <div class="hero">
+    <!-- Pelican bird using an SVG placeholder that looks like the silhouette -->
+    <img class="hero-bird"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Pelecanus_onocrotalus_-Mapungubwe_NP%2C_Limpopo%2C_South_Africa-8.jpg/640px-Pelecanus_onocrotalus_-Mapungubwe_NP%2C_Limpopo%2C_South_Africa-8.jpg"
+      alt="Pelican"
+      onerror="this.style.display='none'"
+    />
+    <div class="hero-search">
+      <input type="text" placeholder="Search..."/>
+      <button><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Latest Photos</h2>
+      <p class="page-info">Page <span>1</span> of 200</p>
+    </div>
+
+    <div class="photo-grid">
+
+      <!-- Row 1 -->
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=300&h=200&fit=crop" alt="Clocks"/>
+        <div class="photo-meta">
+          <span class="photo-date">30 Oct 2020</span>
+          <span class="photo-views">5,905 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=200&fit=crop" alt="Plants"/>
+        <div class="photo-meta">
+          <span class="photo-date">14 Oct 2020</span>
+          <span class="photo-views">16,720 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=300&h=200&fit=crop" alt="Green Field"/>
+        <div class="photo-meta">
+          <span class="photo-date">03 Oct 2020</span>
+          <span class="photo-views">13,460 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop" alt="Headphones"/>
+        <div class="photo-meta">
+          <span class="photo-date">01 Oct 2020</span>
+          <span class="photo-views">11,462 views</span>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop" alt="Hangers"/>
+        <div class="photo-meta">
+          <span class="photo-date">24 Sep 2020</span>
+          <span class="photo-views">76,025 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=300&h=200&fit=crop" alt="Perfume"/>
+        <div class="photo-meta">
+          <span class="photo-date">06 Sep 2020</span>
+          <span class="photo-views">12,860 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=300&h=200&fit=crop" alt="Toy Bus"/>
+        <div class="photo-meta">
+          <span class="photo-date">10 Sep 2020</span>
+          <span class="photo-views">10,905 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&h=200&fit=crop" alt="City Night"/>
+        <div class="photo-meta">
+          <span class="photo-date">10 Sep 2020</span>
+          <span class="photo-views">71,300 views</span>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=300&h=200&fit=crop" alt="Red Art"/>
+        <div class="photo-meta">
+          <span class="photo-date">10 Sep 2020</span>
+          <span class="photo-views">41,720 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc15?w=300&h=200&fit=crop" alt="Flowers"/>
+        <div class="photo-meta">
+          <span class="photo-date">8 Sep 2020</span>
+          <span class="photo-views">71,462 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&h=200&fit=crop" alt="Rose Stone"/>
+        <div class="photo-meta">
+          <span class="photo-date">4 Sep 2020</span>
+          <span class="photo-views">22,905 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=300&h=200&fit=crop" alt="Canyon"/>
+        <div class="photo-meta">
+          <span class="photo-date">20 Aug 2020</span>
+          <span class="photo-views">92,720 views</span>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=300&h=200&fit=crop" alt="Sunset Boat"/>
+        <div class="photo-meta">
+          <span class="photo-date">31 Aug 2020</span>
+          <span class="photo-views">101,510 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=300&h=200&fit=crop" alt="Coral"/>
+        <div class="photo-meta">
+          <span class="photo-date">19 Aug 2020</span>
+          <span class="photo-views">178,646 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=300&h=200&fit=crop" alt="Sea Turtle"/>
+        <div class="photo-meta">
+          <span class="photo-date">8 Aug 2020</span>
+          <span class="photo-views">125,300 views</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=300&h=200&fit=crop" alt="Peace Sand"/>
+        <div class="photo-meta">
+          <span class="photo-date">3 Aug 2020</span>
+          <span class="photo-views">21,234 views</span>
+        </div>
+      </div>
+
+    </div><!-- end photo-grid -->
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button class="btn-prev">Previous</button>
+      <div class="page-numbers">
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+      </div>
+      <button class="btn-next">Next Page</button>
+    </div>
+
+  </div><!-- end container -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-col about-col">
+        <h4>About Catalog-Z</h4>
+        <p>Catalog-Z is a free Bootstrap 5 Alpha 3 HTML template for video and photo websites. You can freely use this template/its layout for a front-end integration with any kind of CMS website.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Links</h4>
+        <a href="#">Advertise</a>
+        <a href="#">Support</a>
+        <a href="#">Our Company</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>&nbsp;</h4>
+        <a href="#">Terms of Use</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>Copyright 2020 Catalog-Z Company. All rights reserved.</p>
+      <p>Designed by TemplateMo</p>
+    </div>
+  </footer>
+
+</body>
+</html>
